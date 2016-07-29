@@ -68,14 +68,19 @@ attr_accessor :equipped_weapon
       if enemy.position.inject(0){|sum, num| sum + num} == @position.inject(0) {|sum, num| sum + num} + 2 || 
         enemy.position.inject(0){|sum, num| sum - num} == @position.inject(0){|sum, num| sum - num} + 2
         grenade_explode(enemy)
+
       end
       #Checks if enemy is within 1 space by comparing with current position. 
-    elsif enemy.position.inject(0){|sum, num| sum + num} == @position.inject(0) {|sum, num| sum + num} + 1 || 
+    elsif 
+      enemy.position.inject(0){|sum, num| sum + num} == @position.inject(0) {|sum, num| sum + num} + 1 || 
         enemy.position.inject(0){|sum, num| sum - num} == @position.inject(0){|sum, num| sum - num} + 1 
-      
-      if @equipped_weapon.nil?
+      if 
+        @equipped_weapon.nil?
         enemy.wound(DEFAULT_ATTACK_DAMAGE)
-      else 
+      elsif 
+        @equipped_weapon.is_a(Grenade?)
+        grenade_explode(enemy)
+       else   
         @equipped_weapon.hit(enemy)
       end
     end
