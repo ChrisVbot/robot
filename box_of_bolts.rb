@@ -5,10 +5,9 @@ class BoxOfBolts < Item
     super('Box of bolts', 25)
   end
 
-  def feed(robot)
-    if robot.is_a? Robot
-      robot.heal(20)
-    end
+  def feed(robot_instance)
+      robot_instance.heal(20)
+    
   end
 
 end
